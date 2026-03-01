@@ -29,4 +29,32 @@ class NotificationHelper {
       details,
     );
   }
+
+  Future<bool> _isAndroidPermissionGranted() async {
+    return await _plugin
+            .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin
+            >()
+            ?.areNotificationsEnabled() ??
+        false;
+  }
+
+  Future<bool> _requestAndroidNotificationsPermission() async {
+    return await _plugin
+            .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin
+            >()
+            ?.requestNotificationsPermission() ??
+        false;
+  }
+
+  Future<bool?> requestPermissions() async {
+    final notificationEnabled = await _isAndroidPermissionGranted();
+    if (!notificationEnabled) {
+      final requestNotificationsPermission =
+          await _requestAndroidNotificationsPermission();
+      return requestNotificationsPermission;
+    }
+    return notificationEnabled;
+  }
 }

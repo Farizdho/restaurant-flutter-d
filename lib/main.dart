@@ -21,10 +21,7 @@ void main() async {
   await NotificationHelper().init();
 
   // ✅ init workmanager
-  await Workmanager().initialize(
-    callbackDispatcher,
-    isInDebugMode: true, // nanti bisa false saat release
-  );
+  await Workmanager().initialize(callbackDispatcher);
 
   runApp(
     ChangeNotifierProvider(
