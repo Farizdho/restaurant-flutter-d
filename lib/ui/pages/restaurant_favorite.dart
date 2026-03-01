@@ -54,7 +54,7 @@ class RestaurantFavorite extends StatelessWidget {
                       '${restaurant.city} • ⭐ ${restaurant.rating}',
                     ),
 
-                    onTap: () {
+                    onTap: () async {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -64,6 +64,9 @@ class RestaurantFavorite extends StatelessWidget {
                           ),
                         ),
                       );
+                      if (context.mounted) {
+                        provider.loadFavorites();
+                      }
                     },
                   ),
                 );
