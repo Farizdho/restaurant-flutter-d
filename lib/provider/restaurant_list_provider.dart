@@ -6,9 +6,7 @@ import '../data/model/restaurant_list_response.dart';
 class RestaurantListProvider extends ChangeNotifier {
   final ApiService apiService;
 
-  RestaurantListProvider(this.apiService) {
-    fetchRestaurantList();
-  }
+  RestaurantListProvider(this.apiService);
 
   ResultState state = LoadingState();
   RestaurantListResponse? result;
