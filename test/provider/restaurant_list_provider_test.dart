@@ -6,7 +6,6 @@ import 'package:restaurant_dicoding/data/api/api_service.dart';
 import 'package:restaurant_dicoding/utils/result_state.dart';
 import 'package:restaurant_dicoding/data/model/restaurant_list_response.dart';
 
-// ================= MOCK =================
 class MockApiService extends Mock implements ApiService {}
 
 void main() {
@@ -17,13 +16,11 @@ void main() {
     apiService = MockApiService();
   });
 
-  // ✅ TEST 1 — initial state
   test('initial state should be LoadingState', () {
     provider = RestaurantListProvider(apiService);
     expect(provider.state, isA<LoadingState>());
   });
 
-  // ✅ TEST 2 — success fetch
   test('should return HasDataState when API success', () async {
     final fakeResponse = RestaurantListResponse(
       error: false,
@@ -40,7 +37,6 @@ void main() {
     expect(provider.state, isA<HasDataState>());
   });
 
-  // ✅ TEST 3 — error fetch
   test('should return ErrorState when API fails', () async {
     when(apiService.getRestaurantList()).thenThrow(Exception('Failed'));
 
