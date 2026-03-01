@@ -15,26 +15,17 @@ class FavoriteProvider extends ChangeNotifier {
   bool _isFavorite = false;
   bool get isFavorite => _isFavorite;
 
-  // ========================
-  // LOAD ALL
-  // ========================
   Future<void> loadFavorites() async {
     _favorites = await databaseHelper.getFavorites();
     notifyListeners();
   }
 
-  // ========================
-  // CHECK FAVORITE
-  // ========================
   Future<void> checkFavorite(String id) async {
     final result = await databaseHelper.getFavoriteById(id);
     _isFavorite = result != null;
     notifyListeners();
   }
 
-  // ========================
-  // TOGGLE
-  // ========================
   Future<void> toggleFavorite(FavoriteRestaurant restaurant) async {
     if (_isFavorite) {
       await databaseHelper.removeFavorite(restaurant.id);

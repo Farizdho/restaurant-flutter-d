@@ -40,9 +40,6 @@ class DatabaseHelper {
     );
   }
 
-  // ========================
-  // INSERT
-  // ========================
   Future<void> insertFavorite(FavoriteRestaurant restaurant) async {
     final db = await database;
     await db.insert(
@@ -52,9 +49,6 @@ class DatabaseHelper {
     );
   }
 
-  // ========================
-  // GET ALL
-  // ========================
   Future<List<FavoriteRestaurant>> getFavorites() async {
     final db = await database;
     final result = await db.query(_tableName);
@@ -62,9 +56,6 @@ class DatabaseHelper {
     return result.map((e) => FavoriteRestaurant.fromMap(e)).toList();
   }
 
-  // ========================
-  // GET BY ID
-  // ========================
   Future<FavoriteRestaurant?> getFavoriteById(String id) async {
     final db = await database;
     final result = await db.query(_tableName, where: 'id = ?', whereArgs: [id]);
@@ -75,9 +66,6 @@ class DatabaseHelper {
     return null;
   }
 
-  // ========================
-  // DELETE
-  // ========================
   Future<void> removeFavorite(String id) async {
     final db = await database;
     await db.delete(_tableName, where: 'id = ?', whereArgs: [id]);

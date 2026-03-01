@@ -17,10 +17,8 @@ import './provider/reminder_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ✅ init notification
   await NotificationHelper().init();
 
-  // ✅ init workmanager
   await Workmanager().initialize(callbackDispatcher);
 
   runApp(

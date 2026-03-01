@@ -3,7 +3,6 @@ import 'package:workmanager/workmanager.dart';
 class WorkmanagerHelper {
   static const String taskName = 'dailyReminderTask';
 
-  /// 🔥 register reminder
   static Future<void> registerDailyReminder() async {
     await Workmanager().registerPeriodicTask(
       taskName,
@@ -14,12 +13,10 @@ class WorkmanagerHelper {
     );
   }
 
-  /// ❌ cancel reminder
   static Future<void> cancelDailyReminder() async {
     await Workmanager().cancelByUniqueName(taskName);
   }
 
-  /// ⏰ hitung delay ke jam 11 siang
   static Duration _calculateInitialDelay() {
     final now = DateTime.now();
     final elevenAM = DateTime(now.year, now.month, now.day, 11);
