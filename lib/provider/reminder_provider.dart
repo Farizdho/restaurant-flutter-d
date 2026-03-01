@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_dicoding/utils/notification_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/workmanager_helper.dart';
 
@@ -19,6 +20,7 @@ class ReminderProvider extends ChangeNotifier {
   }
 
   Future<void> toggleReminder(bool value) async {
+    await NotificationHelper().requestPermissions();
     final prefs = await SharedPreferences.getInstance();
 
     _isActive = value;

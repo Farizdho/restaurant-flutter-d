@@ -54,4 +54,30 @@ void main() {
 
     expect(provider.state, isA<ErrorState>());
   });
+
+  test('state should change from Loading to final state', () async {
+    final fakeResponse = RestaurantListResponse(
+      error: false,
+      message: 'success',
+      count: 1,
+      restaurants: [
+        Restaurant(
+          id: '1',
+          name: 'Test Resto',
+          description: 'desc',
+          pictureId: '14',
+          city: 'Medan',
+          rating: 4.2,
+        ),
+      ],
+    );
+
+    when(
+      mockApiService.getRestaurantList(),
+    ).thenAnswer((_) async => fakeResponse);
+
+    await provider.fetchRestaurantList();
+
+    expect(provider.state, isNot(isA<LoadingState>()));
+  });
 }

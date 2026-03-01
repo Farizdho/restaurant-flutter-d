@@ -55,7 +55,7 @@ class RestaurantFavorite extends StatelessWidget {
                     ),
 
                     onTap: () async {
-                      Navigator.push(
+                      await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (_) => RestaurantDetailPage(
