@@ -46,7 +46,6 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
         ),
         ChangeNotifierProvider(create: (_) => ReviewProvider(ApiService())),
 
-        // ⭐ TAMBAHAN FAVORITE
         ChangeNotifierProvider(
           create: (_) =>
               FavoriteProvider(DatabaseHelper())..checkFavorite(widget.id),
@@ -103,22 +102,18 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
           builder: (context, provider, child) {
             final state = provider.state;
 
-            // 🔄 LOADING
             if (state is LoadingState) {
               return const Center(child: CircularProgressIndicator());
             }
 
-            // ❌ ERROR
             if (state is ErrorState) {
               return Center(child: Text(state.message));
             }
 
-            // 📭 NO DATA
             if (state is NoDataState) {
               return Center(child: Text(state.message));
             }
 
-            // ✅ HAS DATA
             if (state is HasDataState) {
               final restaurant = state.data.restaurant;
 
@@ -126,7 +121,6 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // 🦸 HERO IMAGE
                     Hero(
                       tag: widget.pictureId,
                       child: Image.network(
@@ -142,7 +136,6 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // 🏷️ NAME
                           Text(
                             restaurant.name,
                             style: Theme.of(context).textTheme.headlineSmall,
@@ -150,13 +143,11 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
 
                           const SizedBox(height: 8),
 
-                          // 📍 LOCATION
                           Text('${restaurant.city} • ⭐ ${restaurant.rating}'),
                           Text(restaurant.address),
 
                           const SizedBox(height: 16),
 
-                          // 📝 DESCRIPTION
                           Text(
                             restaurant.description,
                             textAlign: TextAlign.justify,
@@ -164,7 +155,6 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
 
                           const SizedBox(height: 24),
 
-                          // 🍽️ FOODS
                           const Text(
                             'Foods',
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -180,7 +170,6 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
 
                           const SizedBox(height: 24),
 
-                          // 🥤 DRINKS
                           const Text(
                             'Drinks',
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -198,7 +187,6 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
 
                           const SizedBox(height: 24),
 
-                          // ⭐ CUSTOMER REVIEWS
                           const Text(
                             'Customer Reviews',
                             style: TextStyle(
@@ -218,7 +206,6 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
 
                           const SizedBox(height: 24),
 
-                          // ✍️ ADD REVIEW
                           const Text(
                             'Add Review',
                             style: TextStyle(

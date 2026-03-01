@@ -22,7 +22,6 @@ class RestaurantListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Restaurant List'),
         actions: [
-          // 🔍 SEARCH
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
@@ -33,7 +32,6 @@ class RestaurantListPage extends StatelessWidget {
             },
           ),
 
-          // ❤️ FAVORITE
           IconButton(
             icon: const Icon(Icons.favorite),
             onPressed: () {
@@ -58,24 +56,20 @@ class RestaurantListPage extends StatelessWidget {
         builder: (context, provider, child) {
           final state = provider.state;
 
-          // 🔄 LOADING
           if (state is LoadingState) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // ❌ ERROR
           if (state is ErrorState) {
             return Center(
               child: Text(state.message, textAlign: TextAlign.center),
             );
           }
 
-          // 📭 NO DATA
           if (state is NoDataState) {
             return Center(child: Text(state.message));
           }
 
-          // ✅ HAS DATA
           if (state is HasDataState) {
             final restaurants = state.data.restaurants;
 

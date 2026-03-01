@@ -15,7 +15,6 @@ class RestaurantSettings extends StatelessWidget {
       appBar: AppBar(title: const Text('Settings')),
       body: ListView(
         children: [
-          /// 🌙 THEME
           SwitchListTile(
             title: const Text('Dark Theme'),
             value: context.watch<ThemeProvider>().isDarkTheme,
@@ -24,7 +23,6 @@ class RestaurantSettings extends StatelessWidget {
             },
           ),
 
-          /// 🔔 DAILY REMINDER (INI STEP 5)
           SwitchListTile(
             title: const Text('Daily Lunch Reminder'),
             subtitle: const Text('Jam 11 siang'),

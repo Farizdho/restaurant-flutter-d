@@ -10,7 +10,7 @@ class RestaurantDetail {
   final double rating;
   final List<String> foods;
   final List<String> drinks;
-  final List<CustomerReview> customerReviews; // ⭐ TAMBAHAN
+  final List<CustomerReview> customerReviews;
 
   RestaurantDetail({
     required this.id,
@@ -22,7 +22,7 @@ class RestaurantDetail {
     required this.rating,
     required this.foods,
     required this.drinks,
-    required this.customerReviews, // ⭐ TAMBAHAN
+    required this.customerReviews,
   });
 
   factory RestaurantDetail.fromJson(Map<String, dynamic> json) {

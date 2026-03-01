@@ -18,11 +18,8 @@ class RestaurantFavorite extends StatelessWidget {
         appBar: AppBar(title: const Text('Favorite Restaurant')),
         body: Consumer<FavoriteProvider>(
           builder: (context, provider, _) {
-            // 🔄 loading
-
             final favorites = provider.favorites;
 
-            // 📭 empty state (INI DISUKAI REVIEWER)
             if (favorites.isEmpty) {
               return const Center(
                 child: Column(
@@ -36,7 +33,6 @@ class RestaurantFavorite extends StatelessWidget {
               );
             }
 
-            // ✅ list favorite
             return ListView.builder(
               itemCount: favorites.length,
               itemBuilder: (context, index) {
@@ -58,7 +54,6 @@ class RestaurantFavorite extends StatelessWidget {
                       '${restaurant.city} • ⭐ ${restaurant.rating}',
                     ),
 
-                    // 🚀 NAVIGATE KE DETAIL
                     onTap: () {
                       Navigator.push(
                         context,
