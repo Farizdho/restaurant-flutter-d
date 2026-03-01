@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => RestaurantListProvider(ApiService()),
+          create: (_) => RestaurantListProvider(apiService: ApiService()),
         ),
         ChangeNotifierProvider(create: (_) => ReminderProvider()),
       ],

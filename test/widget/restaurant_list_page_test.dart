@@ -10,7 +10,7 @@ void main() {
   testWidgets('Should show loading indicator', (WidgetTester tester) async {
     await tester.pumpWidget(
       ChangeNotifierProvider(
-        create: (_) => RestaurantListProvider(ApiService()),
+        create: (_) => RestaurantListProvider(apiService: ApiService()),
         child: const MaterialApp(home: RestaurantListPage()),
       ),
     );

@@ -1,23 +1,23 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../helpers/test_helper.mocks.dart';
 import 'package:restaurant_dicoding/provider/restaurant_list_provider.dart';
-import 'package:restaurant_dicoding/data/api/api_service.dart';
-import 'package:restaurant_dicoding/utils/result_state.dart';
 import 'package:restaurant_dicoding/data/model/restaurant_list_response.dart';
+import 'package:restaurant_dicoding/utils/result_state.dart';
 
-class MockApiService extends Mock implements ApiService {}
+import 'package:restaurant_dicoding/data/model/restaurant.dart';
 
 void main() {
+  late MockApiService mockApiService;
   late RestaurantListProvider provider;
-  late MockApiService apiService;
 
   setUp(() {
-    apiService = MockApiService();
+    mockApiService = MockApiService();
+    provider = RestaurantListProvider(apiService: mockApiService);
   });
 
   test('initial state should be LoadingState', () {
-    provider = RestaurantListProvider(apiService);
     expect(provider.state, isA<LoadingState>());
   });
 
@@ -26,21 +26,30 @@ void main() {
       error: false,
       message: 'success',
       count: 1,
-      restaurants: [],
+      restaurants: [
+        Restaurant(
+          id: 'rqdv5juczeskfw1e867',
+          name: 'Melting Pot',
+          description: 'Test',
+          pictureId: '14',
+          city: 'Medan',
+          rating: 4.2,
+        ),
+      ],
     );
 
-    when(apiService.getRestaurantList()).thenAnswer((_) async => fakeResponse);
+    when(
+      mockApiService.getRestaurantList(),
+    ).thenAnswer((_) async => fakeResponse);
 
-    provider = RestaurantListProvider(apiService);
     await provider.fetchRestaurantList();
 
     expect(provider.state, isA<HasDataState>());
   });
 
   test('should return ErrorState when API fails', () async {
-    when(apiService.getRestaurantList()).thenThrow(Exception('Failed'));
+    when(mockApiService.getRestaurantList()).thenThrow(Exception('Failed'));
 
-    provider = RestaurantListProvider(apiService);
     await provider.fetchRestaurantList();
 
     expect(provider.state, isA<ErrorState>());
